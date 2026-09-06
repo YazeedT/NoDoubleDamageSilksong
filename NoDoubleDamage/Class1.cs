@@ -27,7 +27,7 @@ namespace NoDoubleDamage
         public static class TakeDamageFromDamager_Patch
         {
             [HarmonyPrefix]
-            static void PrefixTakeDamageFromDamager(ref DamageHero damageHero, GameObject damagingObject, ref int ___damageDealt, ref HazardType ___hazardType, ref DamageHero ___lastDamageHero, ref GameObject ___lastDamagingObject, ref CollisionSide ___collisionSide, ref DamagePropertyFlags ___damagePropertyFlags, ref bool ___isHitBuffered)
+            static void PrefixTakeDamageFromDamager(ref DamageHero damageHero, GameObject damagingObject)
             {
                 // This is a Prefix patch, meaning it runs BEFORE the original method.
                 // We can modify the arguments before the original method uses them.
@@ -43,10 +43,8 @@ namespace NoDoubleDamage
                 // Apply our cap: if the intended damage is greater than 1, change it to 1.
                 if (originalDamage > 1)
                 {
-                    if (originalDamage > 2) {
-                        Debug.Log($"Capping damage from {originalDamage} to 1 from {damagingObject.name}");
-                    }
-                    damageHero.damageDealt = originalDamage - 1; // Modify the damager's value directly
+                    Debug.Log($"Capping damage from {originalDamage} to 1 from {damagingObject.name}");
+                    damageHero.damageDealt = 1; // Modify the damager's value directly
                 }
 
                 // Note: The rest of the original method will now run using the potentially modified damageHero.
