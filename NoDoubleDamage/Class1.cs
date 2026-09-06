@@ -12,7 +12,7 @@ using UnityEngine;
 
 namespace NoDoubleDamage
 {
-    [BepInPlugin("neko.NoDoubleDamage", "No Double Damage", "1.0.0")]
+    [BepInPlugin("neko.NoDoubleDamage", "No Double Damage", "1.1.0")]
     public class NoDoubleDamage : BaseUnityPlugin
     {
         private readonly Harmony harmony = new Harmony("neko.NoDoubleDamage");
